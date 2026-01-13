@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Manager Portal - Система управления собеседованиями</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👥</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-users"></i> HR Manager Portal</h1>
+            <p class="subtitle">Система управления техническими собеседованиями</p>
+        </header>
+
+        <div class="app-container">
+            <!-- Левая панель: Специалисты -->
+            <div class="left-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-user-tie"></i> Специалисты</h2>
+                    <button class="btn btn-primary" onclick="openSpecialistModal()">
+                        <i class="fas fa-plus"></i> Добавить
+                    </button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="searchSpecialist" placeholder="Поиск специалиста..." oninput="filterSpecialists()">
+                </div>
+                <div class="list-container" id="specialistsList">
+                    <!-- Список специалистов будет загружен здесь -->
+                    <div class="loading">Загрузка специалистов...</div>
+                </div>
+            </div>
+
+            <!-- Центральная панель: Навыки -->
+            <div class="center-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-tools"></i> Навыки</h2>
+                    <button class="btn btn-secondary" onclick="openSkillModal()">
+                        <i class="fas fa-plus"></i> Добавить навык
+                    </button>
+                </div>
+                <div class="skills-container" id="skillsList">
+                    <!-- Список навыков будет загружен здесь -->
+                    <div class="loading">Загрузка навыков...</div>
+                </div>
+                <div class="info-box">
+                    <h3><i class="fas fa-info-circle"></i> Информация</h3>
+                    <p>Длительность собеседования: <strong>2 часа 30 минут</strong></p>
+                    <p>Минимальная совместимость навыков: <strong>80%</strong></p>
+                    <p>Для добавления собеседования выберите специалиста слева</p>
+                </div>
+            </div>
+
+            <!-- Правая панель: Собеседования -->
+            <div class="right-panel">
+                <div class="panel-header">
+                    <h2><i class="fas fa-comments"></i> Собеседования</h2>
+                    <button class="btn btn-primary" id="addInterviewBtn" onclick="openInterviewModal()" disabled>
+                        <i class="fas fa-plus"></i> Добавить
+                    </button>
+                </div>
+                <div class="selected-specialist" id="selectedSpecialistInfo">
+                    <!-- Информация о выбранном специалисте -->
+                    <div class="no-selection">
+                        <i class="fas fa-mouse-pointer"></i>
+                        <p>Выберите специалиста для просмотра собеседований</p>
+                    </div>
+                </div>
+                <div class="list-container" id="interviewsList">
+                    <!-- Список собеседований будет загружен здесь -->
+                    <div class="no-selection">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>Нет выбранного специалиста</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уведомления -->
+        <div id="notificationContainer"></div>
+    </div>
+
+    <!-- Модальные окна -->
+    <!-- Модальное окно специалиста -->
+    <div id="specialistModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="specialistModalTitle">Добавить специалиста</h3>
+                <span class="close" onclick="closeModal('specialistModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="specialistForm">
+                    <input type="hidden" id="specialistId">
+                    
+                    <div class="form-group">
+                        <label for="specialistName"><i class="fas fa-user"></i> ФИО специалиста</label>
+                        <input type="text" id="specialistName" required placeholder="Введите ФИО">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="availableFrom"><i class="fas fa-clock"></i> Доступен с</label>
+                            <input type="time" id="availableFrom" required value="09:00">
+                        </div>
+                        <div class="form-group">
+                            <label for="availableTo"><i class="fas fa-clock"></i> Доступен до</label>
+                            <input type="time" id="availableTo" required value="18:00">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-tools"></i> Навыки специалиста</label>
+                        <div class="skills-selector" id="specialistSkillsSelector">
+                            <!-- Навыки будут загружены сюда -->
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('specialistModal')">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно собеседования -->
+    <div id="interviewModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="interviewModalTitle">Добавить собеседование</h3>
+                <span class="close" onclick="closeModal('interviewModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="interviewForm">
+                    <input type="hidden" id="interviewId">
+                    <input type="hidden" id="interviewSpecialistId">
+                    
+                    <div class="form-group">
+                        <label for="candidateName"><i class="fas fa-user-graduate"></i> ФИО соискателя</label>
+                        <input type="text" id="candidateName" required placeholder="Введите ФИО соискателя">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interviewTime"><i class="fas fa-calendar-alt"></i> Время собеседования</label>
+                        <input type="time" id="interviewTime" required value="14:00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-tools"></i> Навыки соискателя</label>
+                        <div class="skills-selector" id="interviewSkillsSelector">
+                            <!-- Навыки будут загружены сюда -->
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interviewSpecialist"><i class="fas fa-user-tie"></i> Специалист</label>
+                        <select id="interviewSpecialist" required>
+                            <!-- Специалисты будут загружены сюда -->
+                        </select>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('interviewModal')">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно навыка -->
+    <div id="skillModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Добавить новый навык</h3>
+                <span class="close" onclick="closeModal('skillModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="skillForm">
+                    <div class="form-group">
+                        <label for="skillName"><i class="fas fa-tag"></i> Название навыка</label>
+                        <input type="text" id="skillName" required placeholder="Введите название навыка">
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('skillModal')">Отмена</button>
+                        <button type="submit" class="btn btn-primary">Добавить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно подтверждения удаления -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirmModalTitle">Подтверждение удаления</h3>
+                <span class="close" onclick="closeModal('confirmModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="confirmModalMessage">Вы уверены, что хотите удалить этот элемент?</p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('confirmModal')">Отмена</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,933 @@
+/* Основные стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1800px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Шапка */
+.header {
+    background: linear-gradient(135deg, #2c3e50 0%, #4a6491 100%);
+    color: white;
+    padding: 25px 40px;
+    text-align: center;
+    border-bottom: 5px solid #3498db;
+}
+
+.header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Контейнер приложения */
+.app-container {
+    display: flex;
+    min-height: 800px;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Общие стили для панелей */
+.left-panel, .center-panel, .right-panel {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.left-panel {
+    flex: 1;
+    border-left: 5px solid #3498db;
+}
+
+.center-panel {
+    flex: 0.8;
+    border-left: 5px solid #2ecc71;
+}
+
+.right-panel {
+    flex: 1;
+    border-left: 5px solid #e74c3c;
+}
+
+/* Заголовки панелей */
+.panel-header {
+    padding: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fafc;
+}
+
+.panel-header h2 {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #2c3e50;
+}
+
+/* Кнопки */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-secondary {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.btn-edit {
+    background-color: #f39c12;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #d68910;
+}
+
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+}
+
+/* Списки и контейнеры */
+.list-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.search-box {
+    padding: 15px 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Элементы списка */
+.specialist-item, .interview-item {
+    background-color: white;
+    border: 2px solid #f0f0f0;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.specialist-item:hover, .interview-item:hover {
+    border-color: #3498db;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.specialist-item.selected, .interview-item.selected {
+    border-color: #3498db;
+    background-color: #f0f8ff;
+}
+
+.specialist-header, .interview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.specialist-name, .interview-candidate {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.specialist-id, .interview-id {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    font-family: monospace;
+    background-color: #f8f9fa;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.specialist-availability, .interview-time {
+    color: #555;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+}
+
+.specialist-skills, .interview-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.skill-tag {
+    background-color: #e8f4fc;
+    color: #2980b9;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.skill-tag.interview {
+    background-color: #f0f9f0;
+    color: #27ae60;
+}
+
+.skill-tag i {
+    font-size: 0.8rem;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.actions .btn {
+    flex: 1;
+    justify-content: center;
+}
+
+/* Стили для выбранного специалиста */
+.selected-specialist {
+    padding: 20px;
+    background-color: #f8fafc;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.selected-specialist-info {
+    background-color: white;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.selected-specialist-info h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selected-specialist-info .specialist-details {
+    color: #555;
+    line-height: 1.6;
+}
+
+.selected-specialist-info .specialist-details div {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Контейнер навыков */
+.skills-container {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-content: flex-start;
+    overflow-y: auto;
+}
+
+.skills-container .skill-tag {
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+/* Информационный блок */
+.info-box {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-top: 2px solid #f0f0f0;
+    border-radius: 0 0 15px 15px;
+}
+
+.info-box h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-box p {
+    margin-bottom: 10px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.info-box strong {
+    color: #2c3e50;
+}
+
+/* Состояния пустых списков */
+.no-selection {
+    text-align: center;
+    padding: 40px 20px;
+    color: #7f8c8d;
+}
+
+.no-selection i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #bdc3c7;
+    opacity: 0.7;
+}
+
+.no-selection p {
+    font-size: 1.1rem;
+    max-width: 300px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Состояние загрузки */
+.loading {
+    text-align: center;
+    padding: 50px 20px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+.loading:after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+/* Модальные окна */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.3s;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+    padding: 20px 25px;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 1;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-header h3 {
+    color: #2c3e50;
+    margin: 0;
+}
+
+.close {
+    font-size: 28px;
+    font-weight: bold;
+    color: #7f8c8d;
+    cursor: pointer;
+    transition: color 0.3s;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.close:hover {
+    color: #e74c3c;
+    background-color: #f8f9fa;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    padding: 20px 25px 25px;
+    border-top: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    border-radius: 0 0 15px 15px;
+}
+
+/* Формы */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="time"],
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%237f8c8d' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    padding-right: 40px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+/* Селектор навыков */
+.skills-selector {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background-color: #f8f9fa;
+}
+
+.skill-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+.skill-checkbox:hover {
+    background-color: #e8f4fc;
+    border-color: #3498db;
+}
+
+.skill-checkbox input[type="checkbox"] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: #3498db;
+}
+
+.skill-checkbox.checked {
+    background-color: #e8f4fc;
+    border-color: #3498db;
+    color: #2980b9;
+}
+
+/* Уведомления */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 10px;
+    color: white;
+    font-weight: 500;
+    z-index: 2000;
+    animation: slideInRight 0.3s, fadeOut 0.3s 2.7s forwards;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.notification.success {
+    background-color: #2ecc71;
+    border-left: 4px solid #27ae60;
+}
+
+.notification.error {
+    background-color: #e74c3c;
+    border-left: 4px solid #c0392b;
+}
+
+.notification.warning {
+    background-color: #f39c12;
+    border-left: 4px solid #d68910;
+}
+
+.notification.info {
+    background-color: #3498db;
+    border-left: 4px solid #2980b9;
+}
+
+.notification i {
+    font-size: 1.2rem;
+}
+
+/* Совместимость навыков */
+.compatibility-indicator {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #f39c12;
+}
+
+.compatibility-indicator.good {
+    border-left-color: #2ecc71;
+    background-color: #f0f9f0;
+}
+
+.compatibility-indicator.bad {
+    border-left-color: #e74c3c;
+    background-color: #fdf2f0;
+}
+
+.compatibility-value {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+/* Стили для элементов навыков с кнопкой удаления */
+.skill-item {
+    position: relative;
+    padding-right: 35px !important;
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+    background-color: #e3f2fd !important;
+    transform: translateY(-2px);
+}
+
+.skill-name {
+    margin-right: 5px;
+}
+
+.skill-delete-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.8rem;
+}
+
+.skill-delete-btn:hover {
+    opacity: 1;
+    background-color: #ffeaea;
+    color: #c0392b;
+}
+
+/* Стили для предупреждения об использовании навыка */
+.skill-in-use-warning {
+    background-color: #fff3cd !important;
+    border-color: #ffeaa7 !important;
+    color: #856404 !important;
+}
+
+.skill-in-use-warning .skill-delete-btn {
+    color: #f39c12;
+}
+
+.skill-in-use-warning .skill-delete-btn:hover {
+    background-color: #fff3cd;
+    color: #d68910;
+}
+
+/* Модальное окно с деталями использования */
+.warning-details {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.warning-details ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.warning-details li {
+    margin-bottom: 5px;
+    color: #6c757d;
+}
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .app-container {
+        flex-direction: column;
+    }
+    
+    .left-panel, .center-panel, .right-panel {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .center-panel {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .header {
+        padding: 20px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .app-container {
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .panel-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .panel-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .actions {
+        flex-wrap: wrap;
+    }
+    
+    .actions .btn {
+        min-width: 120px;
+    }
+    
+    .notification {
+        left: 10px;
+        right: 10px;
+        max-width: none;
+    }
+}
+
+/* Прокрутка */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Утилиты */
+.hidden {
+    display: none !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: #7f8c8d;
+}
+
+.mt-1 { margin-top: 10px; }
+.mt-2 { margin-top: 20px; }
+.mt-3 { margin-top: 30px; }
+.mb-1 { margin-bottom: 10px; }
+.mb-2 { margin-bottom: 20px; }
+.mb-3 { margin-bottom: 30px; }
+/* Стили для навыков с кнопкой удаления */
+.skill-with-btn {
+    position: relative;
+    padding: 10px 40px 10px 15px !important;
+    margin: 8px !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.skill-text {
+    flex-grow: 1;
+    margin-right: 5px;
+}
+
+.skill-delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(231, 76, 60, 0.1);
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.skill-delete-btn:hover {
+    background-color: #e74c3c;
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.skill-delete-btn:disabled,
+.skill-delete-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: rgba(149, 165, 166, 0.2);
+    color: #7f8c8d;
+}
+
+.skill-delete-btn:disabled:hover,
+.skill-delete-btn.disabled:hover {
+    background: rgba(149, 165, 166, 0.2);
+    color: #7f8c8d;
+    transform: translateY(-50%) scale(1);
+}
+
+.skill-in-use {
+    background-color: #f8f9fa !important;
+    border-color: #e9ecef !important;
+    color: #6c757d !important;
+}
+
+.skill-in-use .skill-delete-btn {
+    background: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.skill-in-use .skill-delete-btn:hover {
+    background: rgba(149, 165, 166, 0.2);
+    color: #95a5a6;
+    transform: translateY(-50%) scale(1);
+}
